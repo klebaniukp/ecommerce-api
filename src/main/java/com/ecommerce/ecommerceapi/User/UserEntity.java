@@ -13,18 +13,11 @@ public class UserEntity {
     private String email;
     @Column(name = "password")
     private String password;
-
-    private String errorMessage;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public UserEntity() {
-    }
-
-    public UserEntity(String errorMessage, Long id) {
-        this.errorMessage = errorMessage;
-        this.id = id;
     }
 
     public UserEntity(String name, String lastName, String email, String password) {
