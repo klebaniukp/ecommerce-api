@@ -14,11 +14,17 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    private String errorMessage;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     public UserEntity() {
+    }
+
+    public UserEntity(String errorMessage, Long id) {
+        this.errorMessage = errorMessage;
+        this.id = id;
     }
 
     public UserEntity(String name, String lastName, String email, String password) {
@@ -28,7 +34,7 @@ public class UserEntity {
         this.password = password;
     }
 
-    public UserEntity(String name, String lastName, String email, String password, int id) {
+    public UserEntity(String name, String lastName, String email, String password, long id) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -68,11 +74,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 }
