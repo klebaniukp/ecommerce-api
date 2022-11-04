@@ -34,7 +34,7 @@ public class User {
         }
     }
 
-    @GetMapping(path = "/get/byName/{name}")
+    @GetMapping(path = "/get/{name}")
     public List<UserEntity> getByName(@PathVariable String name) {
         return userRepository.findByName(name);
     }
