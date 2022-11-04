@@ -34,7 +34,7 @@ public class User {
         }
     }
 
-    @GetMapping(path = "/get/{name}")
+    @GetMapping(path = "/get/byName/{name}")
     public List<UserEntity> getByName(@PathVariable String name) {
         return userRepository.findByName(name);
     }
@@ -47,6 +47,22 @@ public class User {
     @RequestMapping(value = "/update", method = RequestMethod.PATCH)
     public UserEntity updateUser(@RequestBody UserEntity updatedUser) {
         return userRepository.save(updatedUser);
+    }
+
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public HashMap<String, String> deleteUser(@PathVariable String id) {
+        try {
+            userRepository.deleteById(parseLong(id));
+
+            HashMap<String, String> result = new HashMap<>();
+            result.put("Message", "User with id: " + id + " deleted successfully");
+
+            return result;
+        } catch (Exception e) {
+            HashMap<String, String> result = new HashMap<>();
+            result.put("Message", "Fail, while deleting user: " + e.getMessage());
+            return result;
+        }
     }
 
 }
