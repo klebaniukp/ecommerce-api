@@ -49,4 +49,20 @@ public class User {
         return userRepository.save(updatedUser);
     }
 
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public HashMap<String, String> deleteUser(@PathVariable String id) {
+        try {
+            userRepository.deleteById(parseLong(id));
+
+            HashMap<String, String> result = new HashMap<>();
+            result.put("Message", "User with id: " + id + " deleted successfully");
+
+            return result;
+        } catch (Exception e) {
+            HashMap<String, String> result = new HashMap<>();
+            result.put("Message", "Fail, while deleting user: " + e.getMessage());
+            return result;
+        }
+    }
+
 }
